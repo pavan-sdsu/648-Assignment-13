@@ -16,11 +16,12 @@ class ProductRow extends Component {
 	}
 
 	render() {
+		const { product } = this.props.product;
 		return (
 			<tr>
-				<td>{this.props.product.name}</td>
-				<td>{this.props.product.category}</td>
-				<td>{this.props.product.price}</td>
+				<td>{product.name}</td>
+				<td>{product.category}</td>
+				<td>{product.price}</td>
 				<td className="text-right">
 					<button onClick={this.edit} className="btn btn-warning mr-2">Edit</button>
 					<button onClick={this.destroy} className="btn btn-info">Delete</button>

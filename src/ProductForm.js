@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-const RESET_VALUES = { id: null, category: '', price: '', name: '', instock: '' }
+const RESET_VALUES = { id: null, category: '', price: '', name: '', instock: null }
 
 class ProductForm extends Component {
 	constructor(props) {
@@ -8,7 +8,7 @@ class ProductForm extends Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSave = this.handleSave.bind(this)
 		this.state = {
-			product: this.props.product || RESET_VALUES,
+			product: (this.props.product && this.props.product.product) || RESET_VALUES,
 			errors: {}
 		}	
 	}
@@ -25,47 +25,47 @@ class ProductForm extends Component {
 	}
 
 	handleSave(e) {
+		e.preventDefault();
 		this.props.onSave(this.state.product);
 		// reset the form values to blank after submitting
 		this.setState({
-			product: this.props.product || RESET_VALUES,
+			product: RESET_VALUES,
 			errors: {}
 		})
-		// prevent the form submit event from triggering an HTTP Post
-		e.preventDefault()
 	}
 
 	render() {
+		const { product } = this.state; 
 		return (
-			<form>
+			<form onSubmit={this.handleSave}>
 				<h4>Add a new product</h4>
 				<p>
 					<label>Name <br />
-						<input type="text" className="form-control" name="name" onChange={this.handleChange} value={this.state.product.name} required />
+						<input type="text" className="form-control" name="name" onChange={this.handleChange} value={product.name} required />
 					</label>
 				</p>
 				<p>
 					<label>Category <br />
-						<input type="text" className="form-control" name="category" onChange={this.handleChange} value={this.state.product.category} required />
+						<input type="text" className="form-control" name="category" onChange={this.handleChange} value={product.category} required />
 					</label>
 				</p>
 				<p>
 					<label>Price <br />
-						<input type="number" className="form-control" name="price" onChange={this.handleChange} value={this.state.product.price} required />
+						<input type="number" className="form-control" name="price" onChange={this.handleChange} value={product.price} required />
 					</label>
 				</p>
 				<label className="d-block mb-3">
 					In stock <br />
 					<div className="form-check form-check-inline">
-						<input className="form-check-input" type="radio" name="instock" id="yes" onChange={this.handleChange} value="true" checked={(this.state.product.instock === "true")} required />
+						<input className="form-check-input" type="radio" name="instock" id="yes" onChange={this.handleChange} value="true" checked={(product.instock === true)} required />
 						<label className="form-check-label" htmlFor="yes">Yes</label>
 					</div>
 					<div className="form-check form-check-inline">
-						<input className="form-check-input" type="radio" name="instock" id="no" onChange={this.handleChange} value="false" checked={(this.state.product.instock === "false")} required />
+						<input className="form-check-input" type="radio" name="instock" id="no" onChange={this.handleChange} value="false" checked={(product.instock === false)} required />
 						<label className="form-check-label" htmlFor="no">No</label>
 					</div>
 				</label>
-				<input type="submit" className="btn btn-info" value="Save" onSubmit={this.handleSave}></input>
+				<input type="submit" className="btn btn-info" value="Save"></input>
 			</form>
 		)
 	}

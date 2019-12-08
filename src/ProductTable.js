@@ -17,11 +17,11 @@ class ProductTable extends Component {
     }
     
     render () {
-        let productsArray = Object.keys(this.props.products).map((pid) => this.props.products[pid])
+        let productsArray = this.props.products;
         let rows = []
 
         productsArray.forEach((product) => {
-            if (product.name.indexOf(this.props.filterText) === -1) {
+            if (product.product.name.indexOf(this.props.filterText) === -1) {
                 return
             }
             rows.push (
