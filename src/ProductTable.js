@@ -4,7 +4,12 @@ import ProductRow from './ProductRow'
 class ProductTable extends Component {
     constructor(props) {
         super(props)
+        this.handleEdit = this.handleEdit.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
+    }
+
+    handleEdit(id) {
+        this.props.onEdit(id)
     }
 
     handleDestroy(id) {
@@ -23,6 +28,7 @@ class ProductTable extends Component {
                 <ProductRow 
                     product={product} 
                     key={product.id} 
+                    onEdit={this.handleEdit}
                     onDestroy={this.handleDestroy}></ProductRow>
             )
         })
