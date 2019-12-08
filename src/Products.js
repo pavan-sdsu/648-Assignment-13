@@ -12,6 +12,8 @@ let PRODUCTS = {
     '6': {id: 6, category: 'Furniture', price: '$100', name: 'Bean Bag'}
 };
 
+const base = "http://localhost:5000";
+
 class Products extends Component {
     constructor(props) {
         super(props)
@@ -22,7 +24,15 @@ class Products extends Component {
         this.handleFilter = this.handleFilter.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
         this.handleSave = this.handleSave.bind(this)
-    }
+	}
+	
+	componentDidMount() {
+		fetch(base + "/products/get")
+		.then((res) => res.json())
+		.then((res) => {
+			console.log(res);
+		})
+	}
 
     handleFilter(filterInput) {
         this.setState(filterInput)

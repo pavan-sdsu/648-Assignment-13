@@ -29,8 +29,8 @@ class ProductTable extends Component {
 
         return (
             <div>
-                <table class="table table-striped table-sm">
-                    <thead class="thead-dark">
+                <table className="table table-striped table-sm">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Name</th>
                             <th>Category</th>

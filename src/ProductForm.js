@@ -41,17 +41,17 @@ class ProductForm extends Component {
                 <h4>Add a new product</h4>
                 <p>
                     <label>Name <br /> 
-                    <input type="text" class="form-control" name="name" onChange={this.handleChange} value={this.state.product.name} /></label>
+                    <input type="text" className="form-control" name="name" onChange={this.handleChange} value={this.state.product.name} /></label>
                 </p>
                 <p>
                     <label>Category <br /> 
-                    <input type="text" class="form-control" name="category" onChange={this.handleChange} value={this.state.product.category} /></label>
+                    <input type="text" className="form-control" name="category" onChange={this.handleChange} value={this.state.product.category} /></label>
                 </p>
                 <p>
                     <label>Price <br /> 
-                    <input type="text" class="form-control" name="price" onChange={this.handleChange} value={this.state.product.price} /></label>
+                    <input type="text" className="form-control" name="price" onChange={this.handleChange} value={this.state.product.price} /></label>
                 </p>
-                <input type="submit" class="btn btn-info" value="Save" onClick={this.handleSave}></input>
+                <input type="submit" className="btn btn-info" value="Save" onClick={this.handleSave}></input>
             </form>
         )
     }

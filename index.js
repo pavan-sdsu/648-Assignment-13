@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 // Express config
-const PORT = 3000;
+const PORT = 5000;
 app.use(express.static(__dirname + "/build"));
 app.use(express.json());
+app.use(cors());
 
 // DB config
 mongoose.connect("mongodb+srv://pavan:o2MjWS9rj9EQVgRK@648-assn-13-7v19x.mongodb.net/assn?retryWrites=true&w=majority", {
