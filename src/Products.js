@@ -37,19 +37,37 @@ class Products extends Component {
     }
 
     handleSave(product) {
-		console.log(product);
-        // if (!product.id) {
-        //     product.id = new Date().getTime()
-        // }
-        // this.setState((prevState) => {
-        //     let products = prevState.products
-        //     products[product.id] = product
-        //     return { products }
-        // })
+		if (product.productid != null) {
+			// Update Product
+
+			fetch(base + "/products/update/" + product.productid, {
+				body: JSON.stringify(product),
+				method: "POST",
+				headers: {'Content-Type': 'application/json'}
+			})
+			.then(res => res.json())
+			.then((res) => {
+				this.getProducts();
+			})
+			.catch(err => console.error(err))
+		} else {
+			// Create Product
+
+			fetch(base + "/products/create", {
+				body: JSON.stringify(product),
+				method: "POST",
+				headers: {'Content-Type': 'application/json'}
+			})
+			.then(res => res.json())
+			.then((res) => {
+				this.getProducts();
+			})
+			.catch(err => console.error(err))
+		}
     }
 
 	handleEdit(productId) {
-		let currProduct = this.state.products.find(p => p.id = productId);
+		let currProduct = this.state.products.find(p => p.id === productId);
 		this.setState({
 			currProduct: currProduct
 		})

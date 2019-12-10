@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-const RESET_VALUES = { id: null, category: '', price: '', name: '', instock: null }
+const RESET_VALUES = { productid: null, category: '', price: '', name: '', instock: null }
 
 class ProductForm extends Component {
 	constructor(props) {
 		super(props)
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSave = this.handleSave.bind(this)
+		this.handleReset = this.handleReset.bind(this)
 		this.state = {
 			product: (this.props.product && this.props.product.product) || RESET_VALUES,
 			errors: {}
@@ -15,8 +16,8 @@ class ProductForm extends Component {
 
 	handleChange(e) {
 		const target = e.target
-		const value = target.value
 		const name = target.name
+		const value = (name === "instock") ? (target.value === "true") : target.value
 
 		this.setState((prevState) => {
 			prevState.product[name] = value
@@ -27,18 +28,20 @@ class ProductForm extends Component {
 	handleSave(e) {
 		e.preventDefault();
 		this.props.onSave(this.state.product);
-		// reset the form values to blank after submitting
+		this.handleReset();
+	}
+
+	handleReset() {
 		this.setState({
-			product: RESET_VALUES,
-			errors: {}
+			product: RESET_VALUES
 		})
 	}
 
 	render() {
-		const { product } = this.state; 
+		const { product } = this.state;
 		return (
 			<form onSubmit={this.handleSave}>
-				<h4>Add a new product</h4>
+				<h4>{ ((product.productid != null) ? "Edit the existing product" : "Add a new product") }</h4>
 				<p>
 					<label>Name <br />
 						<input type="text" className="form-control" name="name" onChange={this.handleChange} value={product.name} required />
@@ -65,7 +68,8 @@ class ProductForm extends Component {
 						<label className="form-check-label" htmlFor="no">No</label>
 					</div>
 				</label>
-				<input type="submit" className="btn btn-info" value="Save"></input>
+				<input type="submit" className="btn btn-info mr-2" value="Save"></input>
+				<input type="reset" onClick={this.handleReset} className="btn btn-danger" value="Clear"></input>
 			</form>
 		)
 	}

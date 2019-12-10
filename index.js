@@ -91,12 +91,9 @@ app.post("/products/create", (req, res) => {
 })
 
 app.post("/products/update/:id", (req, res) => {
-	const id = req.params.id;
-	let body = req.body;
-	body["productid"] = id;
-
 	Product.updateOne({id: req.params.id}, { product: req.body })
 	.then((updateRes) => {
+		if(updateRes.nModified == 0) throw "Values not updated";
 		res.send({
 			success: 1,
 			message: "Updated successfully"
