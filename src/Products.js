@@ -27,7 +27,7 @@ class Products extends Component {
 		fetch(base + "/products/get")
 		.then((res) => res.json())
 		.then((res) => {
-			if (res.success === 0) return console.error(res.message);
+			if (res.success === 0) return alert(res.message);
 			this.setState({ products: res.data })
 		})
 	}
@@ -47,6 +47,7 @@ class Products extends Component {
 			})
 			.then(res => res.json())
 			.then((res) => {
+				if(res.success === 0) return alert(res.message);
 				this.getProducts();
 			})
 			.catch(err => console.error(err))
@@ -60,6 +61,7 @@ class Products extends Component {
 			})
 			.then(res => res.json())
 			.then((res) => {
+				if(res.success === 0) return alert(res.message);
 				this.getProducts();
 			})
 			.catch(err => console.error(err))
@@ -74,11 +76,12 @@ class Products extends Component {
 	}
 
     handleDestroy(productId) {
-        this.setState((prevState) => {
-            let products = prevState.products
-            delete products[productId]
-            return { products }
-        });
+		fetch(base + "/products/delete/" + productId)
+		.then((res) => res.json())
+		.then((res) => {
+			if (res.success === 0) return alert(res.message);
+			this.getProducts();
+		})
     }
 
     render () {

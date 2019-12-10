@@ -22,9 +22,10 @@ class ProductRow extends Component {
 				<td>{product.name}</td>
 				<td>{product.category}</td>
 				<td>{product.price}</td>
+				<td>{(product.instock) ? "Yes" : "No"}</td>
 				<td className="text-right">
 					<button onClick={this.edit} className="btn btn-warning mr-2">Edit</button>
-					<button onClick={this.destroy} className="btn btn-info">Delete</button>
+					<button onClick={this.destroy} className="btn btn-danger">Delete</button>
 				</td>
 			</tr>
 		)
