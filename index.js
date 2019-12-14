@@ -128,5 +128,5 @@ app.get("/products/delete/:id", (req, res) => {
 
 // Server initialization
 app.listen(PORT, () => {
-	console.log('Listening on PORT', PORT);
+	console.log('Listening on PORT', PORT, "\nOpen http://localhost:" + PORT, "in the browser");
 })
