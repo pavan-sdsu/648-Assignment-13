@@ -9,7 +9,7 @@ class ProductForm extends Component {
 		this.handleSave = this.handleSave.bind(this)
 		this.handleReset = this.handleReset.bind(this)
 		this.state = {
-			product: (this.props.product && this.props.product.product) || RESET_VALUES,
+			product: (this.props.product && this.props.product.product) || Object.assign({}, RESET_VALUES),
 			errors: {}
 		}	
 	}
@@ -33,7 +33,7 @@ class ProductForm extends Component {
 
 	handleReset() {
 		this.setState({
-			product: RESET_VALUES
+			product: Object.assign({}, RESET_VALUES)
 		})
 	}
 
