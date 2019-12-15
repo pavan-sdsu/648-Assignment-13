@@ -55,7 +55,7 @@ app.post("/products/create", (req, res) => {
 	.sort({"id": -1})
 	.limit(1)
 	.then((maxProduct) => {
-		const id = maxProduct[0].id + 1;
+		const id = (maxProduct[0]) ? maxProduct[0].id + 1 : 0;
 		
 		const newProduct = new Product({
 			id: id,
