@@ -96,7 +96,7 @@ class Products extends Component {
                     onEdit={this.handleEdit}
                     onDestroy={this.handleDestroy}></ProductTable>
                 <ProductForm
-					key={this.state.currProduct}
+					key={JSON.stringify(this.state.currProduct)}
 					product={this.state.currProduct}
                     onSave={this.handleSave}></ProductForm>
             </div>
